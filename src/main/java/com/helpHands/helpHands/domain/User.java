@@ -26,9 +26,6 @@ public class User {
     private String phone;
     private MultipartFile photo;
     private String bio;
-    private UserType  userType;
-    private String rating;
-    private int totalReviews;
     private String city;
     private OffsetDateTime createdAt;
 
