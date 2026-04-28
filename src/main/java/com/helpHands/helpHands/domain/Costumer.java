@@ -1,6 +1,6 @@
 package com.helpHands.helpHands.domain;
 
-import com.helpHands.helpHands.enums.ServiceCategory;
+
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "tbProvider")
-public class Provider {
+@Table(name = "tbCostumer")
+public class Costumer {
 
     private User user;
-    private ServiceCategory serviceCategory;
-
+    private ServiceOrders order;
 
 }

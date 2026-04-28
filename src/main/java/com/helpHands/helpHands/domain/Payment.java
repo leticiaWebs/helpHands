@@ -1,5 +1,7 @@
 package com.helpHands.helpHands.domain;
 
+import com.helpHands.helpHands.enums.PaymentMethod;
+import com.helpHands.helpHands.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,14 +15,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "tbPayment")
 public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Booking booking;
-    private User client;
-    private User provider;
+    private Costumer client;
+    private Provider provider;
     private BigDecimal amount;
     private PaymentMethod paymentMethod;
     private PaymentStatus status = PaymentStatus.PENDING;
@@ -29,7 +32,7 @@ public class Payment {
     private LocalDateTime paymentDate;
     private LocalDateTime refundDate;
     private String refundReason;
-    private String gatewayResponse;
+//    private String gatewayResponse;
     private BigDecimal fee = BigDecimal.ZERO;
     private BigDecimal netAmount;
     private LocalDateTime createdAt;
