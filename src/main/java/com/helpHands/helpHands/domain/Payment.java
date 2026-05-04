@@ -1,5 +1,6 @@
 package com.helpHands.helpHands.domain;
 
+import com.helpHands.helpHands.domain.users.Costumer;
 import com.helpHands.helpHands.enums.PaymentMethod;
 import com.helpHands.helpHands.enums.PaymentStatus;
 import jakarta.persistence.*;

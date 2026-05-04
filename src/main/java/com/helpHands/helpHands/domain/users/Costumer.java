@@ -1,6 +1,7 @@
-package com.helpHands.helpHands.domain;
+package com.helpHands.helpHands.domain.users;
 
 
+import com.helpHands.helpHands.domain.ServiceOrders;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbCostumer")
 public class Costumer {
 
-    private User user;
+    private UserCustomers userCustomers;
     private ServiceOrders order;
 
 }

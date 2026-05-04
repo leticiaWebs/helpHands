@@ -1,5 +1,6 @@
 package com.helpHands.helpHands.domain;
 
+import com.helpHands.helpHands.domain.users.Costumer;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;

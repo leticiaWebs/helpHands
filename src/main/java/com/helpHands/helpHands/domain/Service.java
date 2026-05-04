@@ -1,5 +1,6 @@
 package com.helpHands.helpHands.domain;
 
+import com.helpHands.helpHands.domain.users.UserCustomers;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 public class Service {
 
     Long id;
-    private User provider;
+    private UserCustomers provider;
     private String title;
     private String description;
     private String category;

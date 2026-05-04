@@ -1,4 +1,4 @@
-package com.helpHands.helpHands.domain;
+package com.helpHands.helpHands.domain.users;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Builder
 @Table(name = "tbUser")
-public class User {
+public class UserCustomers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
