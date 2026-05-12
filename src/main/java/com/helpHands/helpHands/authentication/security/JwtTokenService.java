@@ -23,10 +23,7 @@ public class JwtTokenService {
     @Value("${jwt.expiration.hours}")
     private int expirationHours;
 
-    /**
-     * Gera um token JWT para o usuário autenticado.
-     * O "subject" do token é o username (geralmente o email).
-     */
+
     public String generateToken(UserDetailsImpl user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secretKey);
@@ -34,18 +31,13 @@ public class JwtTokenService {
                     .withIssuer(issuer)
                     .withIssuedAt(now())
                     .withExpiresAt(expiration())
-                    .withSubject(user.getUsername())  // ✅ ADAPTE: pode adicionar claims extras aqui
-                    // Exemplo de claim extra: .withClaim("userId", user.getUser().getId())
+                    .withSubject(user.getUsername())
                     .sign(algorithm);
         } catch (JWTCreationException e) {
             throw new JWTCreationException("Erro ao gerar token JWT.", e);
         }
     }
 
-    /**
-     * Valida o token e retorna o subject (username/email do usuário).
-     * Lança exceção se o token for inválido ou expirado.
-     */
     public String getSubjectFromToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secretKey);
@@ -59,7 +51,6 @@ public class JwtTokenService {
         }
     }
 
-    // ✅ ADAPTE: ajuste o fuso horário para o seu (ex: "America/Sao_Paulo")
     private Instant now() {
         return ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")).toInstant();
     }

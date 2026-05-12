@@ -1,5 +1,6 @@
 package com.helpHands.helpHands.authentication.security;
 
+import com.helpHands.helpHands.authentication.user.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +16,6 @@ public class UserDetailsImpl implements UserDetails {
         this.user = user;
     }
 
-    /** Retorna o objeto User original (útil para acessar dados extras) */
     public User getUser() {
         return user;
     }
@@ -33,17 +33,11 @@ public class UserDetailsImpl implements UserDetails {
         return user.getPassword();
     }
 
-    /**
-     * ✅ ADAPTE: se o seu login for por username e não email,
-     *    troque para user.getUsername()
-     */
     @Override
     public String getUsername() {
         return user.getEmail();
     }
 
-    // Mantenha todos como true para um comportamento padrão.
-    // ✅ ADAPTE: se precisar bloquear contas, troque a lógica aqui.
     @Override public boolean isAccountNonExpired()    { return true; }
     @Override public boolean isAccountNonLocked()     { return true; }
     @Override public boolean isCredentialsNonExpired(){ return true; }

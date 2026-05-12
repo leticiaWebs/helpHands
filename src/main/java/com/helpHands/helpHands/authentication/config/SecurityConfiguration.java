@@ -1,5 +1,6 @@
 package com.helpHands.helpHands.authentication.config;
 
+import com.helpHands.helpHands.authentication.security.UserAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,51 +14,45 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 public class SecurityConfiguration {
 
-
     @Autowired
     private UserAuthenticationFilter userAuthenticationFilter;
 
-    // ✅ ADAPTE: endpoints que NÃO precisam de autenticação
     public static final String[] ENDPOINTS_PUBLIC = {
-            "/users/login",  // login
-            "/users",        // criar conta
-            // Adicione outros endpoints públicos aqui, ex:
-            // "/products",
-            // "/h2-console/**",  // apenas para dev com H2
+            "/users/login",
+            "/users",
+
     };
 
-    // ✅ ADAPTE: endpoints que exigem apenas estar autenticado (qualquer role)
     public static final String[] ENDPOINTS_AUTHENTICATED = {
             "/users/profile",
-            // Adicione seus endpoints autenticados aqui
+
     };
 
-    // ✅ ADAPTE: endpoints exclusivos para ROLE_ADMIN
+
     public static final String[] ENDPOINTS_ADMIN = {
             "/admin/**",
-            // Adicione seus endpoints de admin aqui
+
     };
 
-    // ✅ ADAPTE: endpoints exclusivos para ROLE_USER
+
     public static final String[] ENDPOINTS_USER = {
             "/users/dashboard",
-            // Adicione seus endpoints de usuário comum aqui
+
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())  // Desativa CSRF (padrão para APIs REST)
+                .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Sem sessão (stateless)
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(ENDPOINTS_PUBLIC).permitAll()
                                 .requestMatchers(ENDPOINTS_AUTHENTICATED).authenticated()
                                 .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
                                 .requestMatchers(ENDPOINTS_USER).hasRole("USER")
-                                // ✅ ADAPTE: escolha entre denyAll() ou authenticated() para o restante
-                                .anyRequest().denyAll()  // Bloqueia tudo que não foi mapeado
-                        // .anyRequest().authenticated()  // Alternativa: exige login para o resto
+
+                                .anyRequest().denyAll()
                 )
                 .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
