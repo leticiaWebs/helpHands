@@ -11,9 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
+
 public class User {
 
     @Id
@@ -23,6 +21,15 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    public User(Long id, String email, String password, List<Role> roles) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User() {
+    }
     public Long getId() {
         return id;
     }
